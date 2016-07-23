@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Let.cs", "Let.cs\Let.cs.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Let.cs.Tests", "Let.cs.Tests\Let.cs.Tests.csproj", "{367994DD-EF59-4A06-9D70-FDA8B42131F7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{CDD4DABB-4598-49F1-ABE6-C38CE883B96F}"
+	ProjectSection(SolutionItems) = preProject
+		Let.cs\Let.cs.csproj.nuspec = Let.cs\Let.cs.csproj.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

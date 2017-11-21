@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace LetTestHelper
@@ -11,6 +12,10 @@ namespace LetTestHelper
         public static T Let<T>(Expression<Func<T>> expression)
         {
             var expressionBody = expression.Body.ToString();
+            var genericArguments = expression.ReturnType.GenericTypeArguments;
+
+            if (genericArguments.Length > 0)
+                expressionBody += string.Join(",", genericArguments.Select(t => t.Name));
 
             if (_objects.ContainsKey(expressionBody))
                 return (T) _objects[expressionBody];

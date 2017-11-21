@@ -67,9 +67,21 @@ namespace Let.cs.Tests
             Assert.That(callbackInteger(), Is.EqualTo(1337));
         }
 
+        [Test]
+        public void ItAllowsGenericsToBeAssigned()
+        {
+            Mock<I1> WrappedI1() => LetHelper.Let(() => new Mock<I1>());
+            Mock<I2> WrappedI2() => LetHelper.Let(() => new Mock<I2>());
+
+            Assert.That(WrappedI1().Object, Is.Not.EqualTo(WrappedI2().Object));
+        }
+
         public class Spy
         {
             public virtual bool Called() { return true; }
         }
+
+        public interface I1 { }
+        public interface I2 { }
     }
 }

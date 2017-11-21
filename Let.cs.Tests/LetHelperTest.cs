@@ -75,6 +75,30 @@ namespace Let.cs.Tests
 
             Assert.That(WrappedI1().Object, Is.Not.EqualTo(WrappedI2().Object));
         }
+            
+        [Test]
+        public void NamedInstancesWithFuncs()
+        {
+            Spy Spy1() => LetHelper.Let("spy1", () => new Spy());
+            Spy Spy2() => LetHelper.Let("spy2", () => new Spy());
+
+            Assert.That(Spy1(), Is.Not.EqualTo(Spy2()));
+        }
+
+        [Test, Ignore("should this throw an exception or overwrite the previous definition?")]
+        public void ItDoesntAllowNamingCollisions()
+        {
+            Spy Spy1() => LetHelper.Let("spy1", () => new Spy());
+            Spy Spy2() => LetHelper.Let("spy1", () => new Spy());
+
+            // option 1
+            Assert.That(Spy2, Throws.InvalidOperationException);
+
+            // option 2
+            // this feels wrong but it's also a
+            // very simple example
+            Assert.That(Spy1(), Is.EqualTo(Spy2()));
+        }
 
         public class Spy
         {

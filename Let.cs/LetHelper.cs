@@ -9,6 +9,16 @@ namespace LetTestHelper
     {
         private static Dictionary<string, object> _objects = new Dictionary<string, object>();
 
+        public static T Let<T>(string description, Func<T> func)
+        {
+            if (_objects.ContainsKey(description))
+                return (T) _objects[description];
+
+            var result = func();
+            _objects.Add(description, result);
+            return result;
+        }
+
         public static T Let<T>(Expression<Func<T>> expression)
         {
             var expressionBody = expression.Body.ToString();
@@ -29,5 +39,7 @@ namespace LetTestHelper
         {
             _objects.Clear();
         }
+
+        private class Defined { }
     }
 }

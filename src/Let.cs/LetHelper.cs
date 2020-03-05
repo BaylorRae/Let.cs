@@ -21,23 +21,26 @@ namespace LetTestHelper
 
         public static T Let<T>(Expression<Func<T>> expression)
         {
-            var expressionBody = expression.Body.ToString();
-            var genericArguments = expression.ReturnType.GenericTypeArguments;
-
-            if (genericArguments.Length > 0)
-                expressionBody += string.Join(",", genericArguments.Select(t => t.Name));
-
-            if (_objects.ContainsKey(expressionBody))
-                return (T) _objects[expressionBody];
-
-            var result = expression.Compile().Invoke();
-            _objects.Add(expressionBody, result);
-            return (T) result;
+            return Let(
+                CreateDescriptionFromExpression(expression),
+                expression.Compile()
+            );
         }
 
         public static void Flush()
         {
             _objects.Clear();
+        }
+
+        private static string CreateDescriptionFromExpression<T>(Expression<Func<T>> expression)
+        {
+            var description = expression.Body.ToString();
+            var genericArguments = expression.ReturnType.GenericTypeArguments;
+
+            if (genericArguments.Length > 0)
+                description += string.Join(",", genericArguments.Select(t => t.Name));
+
+            return description;
         }
 
         private class Defined { }

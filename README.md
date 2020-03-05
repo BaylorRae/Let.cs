@@ -20,27 +20,27 @@ namespace Example
   [TestFixture]
   public class ApiExample
   {
-    private ArticleDto _articleDto => Let(() => Factory<ArticleDto>.Build());
-    private ArticleService _service => Let(() => new ArticleService());
-    private Article article => Let(() => _service.BuildArticleFromDto(_articleDto));
-    
-    [TearDown]
-    public void FlushLetHelper()
-    {
-      LetHelper.Flush();
-    }
+      private ArticleDto _articleDto => Let(() => Factory<ArticleDto>.Build());
+      private ArticleService _service => Let(() => new ArticleService());
+      private Article article => Let(() => _service.BuildArticleFromDto(_articleDto));
+      
+      [TearDown]
+      public void FlushLetHelper()
+      {
+          LetHelper.Flush();
+      }
 
-    [Test]
-    public void ItAssignsTheTitle()
-    {
-      Assert.That(article.Title, Is.EqualTo("article from factory"));
-    }
+      [Test]
+      public void ItAssignsTheTitle()
+      {
+          Assert.That(article.Title, Is.EqualTo("article from factory"));
+      }
 
-    [Test]
-    public void ItAssignsTheBody()
-    {
-      Assert.That(article.Body, Is.EqualTo("article-body"));
-    }
+      [Test]
+      public void ItAssignsTheBody()
+      {
+          Assert.That(article.Body, Is.EqualTo("article-body"));
+      }
   }
 }
 ```
@@ -57,11 +57,11 @@ namespace MyProject.TestHelper
   [TestFixture]
   public class TestBase
   {
-    [TearDown]
-    public void Clean_LetHelper()
-    {
-      LetTestHelper.LetHelper.Flush();
-    }
+      [TearDown]
+      public void Clean_LetHelper()
+      {
+          LetTestHelper.LetHelper.Flush();
+      }
   }
 }
 ```

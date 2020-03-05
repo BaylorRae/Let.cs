@@ -8,14 +8,14 @@ namespace Let.cs.Tests
     [TestFixture]
     public class LetHelperTest
     {
-        private Mock<Spy> _spy;
+        private Mock<ISpy> _spy;
         private Func<bool> _callback;
 
         [SetUp]
         public void SetUp()
         {
-            _spy = new Mock<Spy>();
-            _callback = () => LetHelper.Let(() => _spy.Object.Called());
+            _spy = new Mock<ISpy>();
+            _callback = () => LetHelper.Let(() => _spy.Object.DoSomething());
         }
 
         [TearDown]
@@ -40,7 +40,7 @@ namespace Let.cs.Tests
             for (var i = 0; i < 10; i++)
                 _callback();
 
-            _spy.Verify(s => s.Called(), Times.Once);
+            _spy.Verify(s => s.DoSomething(), Times.Once);
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace Let.cs.Tests
             _callback();
             _callback();
 
-            _spy.Verify(s => s.Called(), Times.Exactly(2));
+            _spy.Verify(s => s.DoSomething(), Times.Exactly(2));
         }
 
         [Test]
@@ -98,11 +98,6 @@ namespace Let.cs.Tests
             // this feels wrong but it's also a
             // very simple example
             Assert.That(Spy1(), Is.EqualTo(Spy2()));
-        }
-
-        public class Spy
-        {
-            public virtual bool Called() { return true; }
         }
 
         public interface I1 { }

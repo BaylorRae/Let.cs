@@ -4,11 +4,11 @@ When testing in C# it's not unusual to test instances of a class. The problem is
 we all face though is knowing where to initialize our objects.
 
 1. Create a field that is initialized and reset on `TearDown`?
-2. Create a null field that is initialized during `[SetUp]`
-3. Duplicate the initialization in every `[Test]`
+2. Create a null field that is initialized during `[SetUp]`?
+3. Duplicate the initialization in every `[Test]`?
 
 All three of these are valid, and unfortunately, all three can be found in the
-same project (and sometimes the same test).
+same project and sometimes the same test!
 
 ```csharp
 namespace DoYourTestsLookLikeThis
@@ -44,7 +44,7 @@ namespace DoYourTestsLookLikeThis
 }
 ```
 
-## Let.cs To The Rescue 🦸
+## It's dangerous to go alone, take Let.cs with you 🤺
 
 
 ```csharp
@@ -59,7 +59,7 @@ namespace HappyDance
         private UnitOfWork Work => Let(() => new UnitOfWork());
         private Mock<IArticlesService> MockArticlesService => Let(() => new Mock<IArticlesService>());
 
-        // It's so easy, I why not move it here too
+        // It's so easy, why not move it here too
         private ArticlesController Controller => Let(() => new ArticlesController(MockArticlesService.Object);
 
         [TearDown]
@@ -79,11 +79,10 @@ namespace HappyDance
 }
 ```
 
-## Caveat
+## Flush the Cache 🚽
 
 - After each test you will need to manually flush the results. My recommendation
-  is creating a test helper that all test classes inherit from that flushes the
-  cache.
+  is creating a test helper that will flush the cache on tear down.
 
 ```csharp
 namespace MyProject.TestHelper

@@ -42,7 +42,5 @@ namespace LetTestHelper
 
             return description;
         }
-
-        private class Defined { }
     }
 }

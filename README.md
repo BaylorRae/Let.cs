@@ -66,5 +66,5 @@ namespace MyProject.TestHelper
 }
 ```
 
-[rspec_let]: https://www.relishapp.com/rspec/rspec-core/v/2-5/docs/helper-methods/let-and-let
+[rspec_let]: https://relishapp.com/rspec/rspec-core/v/3-9/docs/helper-methods/let-and-let
 [memoization]: https://en.wikipedia.org/wiki/Memoization

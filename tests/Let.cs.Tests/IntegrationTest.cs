@@ -8,15 +8,13 @@ namespace Let.cs.Tests
     [TestFixture]
     public class IntegrationTest
     {
-        private Mock<ISpy> MockSpy;
-        private bool DoSomethingWithSpy => LetHelper.Let(() => MockSpy.Object.DoSomething());
+        private Mock<ISpy> MockSpy => LetHelper.Let("MockSpy", () => {
+            var mockSpy = new Mock<ISpy>();
+            mockSpy.Setup(spy => spy.DoSomething()).Returns(true);
+            return mockSpy;
+        });
 
-        [SetUp]
-        public void BeforeEach()
-        {
-            MockSpy = new Mock<ISpy>();
-            MockSpy.Setup(spy => spy.DoSomething()).Returns(true);
-        }
+        private bool DoSomethingWithSpy => LetHelper.Let(() => MockSpy.Object.DoSomething());
 
         [TearDown]
         public void AfterEach()

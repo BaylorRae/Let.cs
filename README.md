@@ -1,9 +1,9 @@
 ## Let.cs
 
-When testing in C# it's not unusual to test instances of a class. The problem is
-we all face though is knowing where to initialize our objects.
+When testing in C# it's not unusual to test instances of a class. The problem we
+all face is having a place to initialize our objects.
 
-1. Create a field that is initialized and reset on `TearDown`?
+1. Create a field that is initialized and reset on `[TearDown]`?
 2. Create a null field that is initialized during `[SetUp]`?
 3. Duplicate the initialization in every `[Test]`?
 
@@ -22,7 +22,7 @@ namespace DoYourTestsLookLikeThis
         [SetUp]
         public void BeforeEach()
         {
-            MockArticlesService = new Mock<IArticlesService>();
+            MockArticlesService = new Mock<IArticlesService>(_work);
         }
 
         [TearDown]
@@ -57,7 +57,9 @@ namespace HappyDance
     public class ArticlesControllerTest
     {
         private UnitOfWork Work => Let(() => new UnitOfWork());
-        private Mock<IArticlesService> MockArticlesService => Let(() => new Mock<IArticlesService>());
+
+        // We can depend on other Lets
+        private Mock<IArticlesService> MockArticlesService => Let(() => new Mock<IArticlesService>(Work));
 
         // It's so easy, why not move it here too
         private ArticlesController Controller => Let(() => new ArticlesController(MockArticlesService.Object);

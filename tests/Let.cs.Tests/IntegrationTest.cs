@@ -25,9 +25,18 @@ namespace Let.cs.Tests
         [Test]
         public void ItLazilyInvokesTheCallback()
         {
-          MockSpy.Verify(spy => spy.DoSomething(), Times.Exactly(0));
-          Assert.That(DoSomethingWithSpy, Is.True);
-          MockSpy.Verify(spy => spy.DoSomething(), Times.Exactly(1));
+            MockSpy.Verify(spy => spy.DoSomething(), Times.Exactly(0));
+            Assert.That(DoSomethingWithSpy, Is.True);
+            MockSpy.Verify(spy => spy.DoSomething(), Times.Exactly(1));
+        }
+
+        [Test]
+        public void ItFlushesTheCache()
+        {
+            var originalSpy = MockSpy;
+            Assert.That(originalSpy, Is.SameAs(MockSpy));
+            LetHelper.Flush();
+            Assert.That(originalSpy, Is.Not.SameAs(MockSpy));
         }
     }
 }

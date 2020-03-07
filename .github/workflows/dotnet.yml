@@ -19,3 +19,8 @@ jobs:
       run: |
         mkdir build
         dotnet pack -c Release -o ./build src/Let.cs/Let.cs.csproj
+
+    - uses: actions/upload-artifact@v1
+      with:
+        name: Nuget Package
+        path: build

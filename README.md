@@ -1,5 +1,7 @@
 ## Let.cs
 
+[![build](https://github.com/BaylorRae/Let.cs/workflows/build/badge.svg)](https://github.com/BaylorRae/Let.cs/actions?query=workflow%3Abuild) [![nuget](https://img.shields.io/nuget/v/RSpec-Let)](https://www.nuget.org/packages/RSpec-Let/)
+
 When testing in C# it's not unusual to test instances of a class. The problem we
 all face is having a place to initialize our objects.
 

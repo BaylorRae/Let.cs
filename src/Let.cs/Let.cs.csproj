@@ -3,6 +3,23 @@
   <PropertyGroup>
     <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
     <Version>1.1.1</Version>
+    <PackageId>RSpec-Let</PackageId>
+    <Title>RSpec Let</Title>
+    <Authors>baylor</Authors>
+    <RepositoryUrl>https://github.com/BaylorRae/Let.cs</RepositoryUrl>
+    <SupportUrl>https://github.com/BaylorRae/Let.cs/issues</SupportUrl>
+    <Description>When testing in C# it's not unusual to test instances of a class. The problem we
+      all face is having a place to initialize our objects.
+
+      1. Create a field that is initialized and reset on `[TearDown]`?
+      2. Create a null field that is initialized during `[SetUp]`?
+      3. Duplicate the initialization in every `[Test]`?
+
+      All three of these are valid, and unfortunately, all three can be found in the
+      same project and sometimes the same test!</Description>
+    <Copyright>Baylor Rae' 2020</Copyright>
+    <PackageLicenseUrl>https://github.com/BaylorRae/Let.cs/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>NUnit;MSTest;XUnit;RSpec;memoization;helper;dependency injection;</PackageTags>
   </PropertyGroup>
 
 </Project>

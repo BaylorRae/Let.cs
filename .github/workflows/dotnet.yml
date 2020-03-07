@@ -1,0 +1,21 @@
+name: build
+on: [push, pull_request]
+jobs:
+  all:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1.100'
+
+    - name: Tests
+      run: |
+        cd tests/Let.cs.Tests
+        dotnet test
+
+    - name: Build Nuget Package
+      run: |
+        mkdir build
+        dotnet pack -c Release -o ./build src/Let.cs/Let.cs.csproj
